@@ -112,7 +112,7 @@ export default function Home() {
   // Scroll to category function
   const scrollToCategory = (category: string) => {
     setActiveCategory(category);
-    const refs: { [key: string]: React.RefObject<HTMLDivElement> } = {
+    const refs: { [key: string]: React.RefObject<HTMLDivElement | null> } = {
       sushi: sushiRef,
       sashimi: sashimiRef,
       drinks: drinksRef,
