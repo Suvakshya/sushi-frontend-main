@@ -329,9 +329,18 @@ export default function Home() {
                           alt={item.name}
                           className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                           loading="lazy"
+                          // onError={(e) => {
+                          //   e.target.style.display = "none";
+                          //   e.target.nextElementSibling.style.display = "flex";
+                          // }}
                           onError={(e) => {
-                            e.target.style.display = "none";
-                            e.target.nextElementSibling.style.display = "flex";
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            if (target.nextElementSibling) {
+                              (
+                                target.nextElementSibling as HTMLElement
+                              ).style.display = "flex";
+                            }
                           }}
                         />
                         <div className="hidden w-full h-full items-center justify-center text-gray-400">
