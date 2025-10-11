@@ -39,8 +39,10 @@ export default function Home() {
     try {
       setLoading(true);
       setError(null);
+      // const API =
+      //   process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3005/api/v1";
       const API =
-        process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3005/api/v1";
+        process.env.NEXT_PUBLIC_API_BASE_URL || "https://sushi-backend-main.vercel.app/api/v1/sliders";
 
       const response = await fetch(`${API}/sliders`);
 
