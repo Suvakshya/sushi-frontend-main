@@ -10,6 +10,7 @@ interface ImageUploadProps {
   label?: string;
   className?: string;
   aspectRatio?: string;
+  required?: boolean;
 }
 
 export default function ImageUpload({
