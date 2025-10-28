@@ -19,6 +19,7 @@ interface AuthContextType {
   logout: () => void;
   loading: boolean;
   isAuthenticated: boolean;
+  checkAuth: () => boolean;
 }
 
 interface RegisterData {
@@ -55,6 +56,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
     setLoading(false);
   }, []);
+
+  const checkAuth = (): boolean => {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+    return !!(token && userData);
+  };
 
   const login = async (email: string, password: string) => {
     try {
@@ -133,7 +140,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     register,
     logout,
     loading,
-    isAuthenticated: !!user
+    isAuthenticated: !!user,
+    checkAuth
   };
 
   return (

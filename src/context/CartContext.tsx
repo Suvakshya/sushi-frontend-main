@@ -27,6 +27,8 @@ interface CartContextType {
   updateQuantity: (itemId: string, newQuantity: number) => void;
   clearCart: () => void;
   getCartTotal: () => number;
+  requiresAuth: boolean;
+  setRequiresAuth: (value: boolean) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -46,6 +48,7 @@ interface CartProviderProps {
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartCount, setCartCount] = useState(0);
+  const [requiresAuth, setRequiresAuth] = useState(false);
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -67,6 +70,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const addToCart = (item: MenuItem) => {
+    // Check if user is authenticated
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setRequiresAuth(true);
+      return;
+    }
+
     setCart(prevCart => {
       const existingItem = prevCart.find(cartItem => cartItem._id === item._id);
       let newCart: CartItem[];
@@ -131,7 +141,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     removeFromCart,
     updateQuantity,
     clearCart,
-    getCartTotal
+    getCartTotal,
+    requiresAuth,
+    setRequiresAuth
   };
 
   return (

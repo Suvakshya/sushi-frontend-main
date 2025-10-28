@@ -965,75 +965,89 @@ export default function MenuItemsAdmin() {
           </div>
         )}
 
-        <CardGrid
-          items={currentItems}
-          renderItem={(item: MenuItem) => (
-            <motion.div
-              key={item._id}
-              className="relative bg-white rounded-2xl shadow-md p-6 pt-10 flex flex-col items-center text-center hover:shadow-lg transition-all duration-200 border border-[#EF5350]/40"
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="absolute top-4 right-4 flex gap-2 z-10">
-                <FiEdit
-                  className="text-[#EF5350] cursor-pointer hover:text-[#E57373] transition-colors"
-                  onClick={() => openEditModal(item)}
-                />
-                <FiTrash2
-                  className="text-red-600 cursor-pointer hover:text-red-800 transition-colors"
-                  onClick={() => {
-                    setDeleteId(item._id);
-                    setShowDeleteModal(true);
-                  }}
-                />
-              </div>
-
-              <div className="relative w-[200px] h-[200px] rounded-2xl overflow-hidden border-4 border-[#EF5350] mb-4">
-                {item.image ? (
-                  // Use regular img tag instead of Next.js Image for Cloudinary URLs
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                      const fallback = target.nextElementSibling as HTMLElement;
-                      if (fallback) {
-                        fallback.classList.remove("hidden");
-                      }
-                    }}
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                    <span>No Image</span>
-                  </div>
-                )}
-                {/* Fallback div */}
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center ">
-                  <span>Image failed to load</span>
-                </div>
-              </div>
-
-              <h4 className="text-lg font-semibold text-gray-800">
-                {item.name}
-              </h4>
-              <p className="text-sm text-gray-600 mt-1 capitalize">
-                {item.category}
-              </p>
-              <p className="text-sm text-[#EF5350] font-semibold">₨ {item.price.toFixed(2)}</p>
-              <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
-              <p
-                className={`text-sm mt-1 ${
-                  item.is_available ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {item.is_available ? "Available" : "Not Available"}
-              </p>
-            </motion.div>
-          )}
-          emptyMessage="No menu items found."
-          gridClassName="grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+       <CardGrid
+  items={currentItems}
+  renderItem={(item: MenuItem) => (
+    <motion.div
+      key={item._id}
+      className="relative bg-white rounded-2xl shadow-md p-6 pt-10 flex flex-col items-center text-center hover:shadow-lg transition-all duration-200 border border-[#EF5350]/40"
+      whileHover={{ scale: 1.02 }}
+    >
+      <div className="absolute top-4 right-4 flex gap-2 z-10">
+        <FiEdit
+          className="text-[#EF5350] cursor-pointer hover:text-[#E57373] transition-colors"
+          onClick={() => openEditModal(item)}
         />
+        <FiTrash2
+          className="text-red-600 cursor-pointer hover:text-red-800 transition-colors"
+          onClick={() => {
+            setDeleteId(item._id);
+            setShowDeleteModal(true);
+          }}
+        />
+      </div>
+
+      <div className="relative w-[200px] h-[200px] rounded-2xl overflow-hidden border-4 border-[#EF5350] mb-4">
+        {item.image ? (
+          <div className="relative w-full h-full">
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                console.error(`Failed to load image for ${item.name}:`, item.image);
+                const target = e.target as HTMLImageElement;
+                target.style.display = "none";
+                // Show fallback
+                const fallback = document.getElementById(`fallback-${item._id}`);
+                if (fallback) {
+                  fallback.style.display = "flex";
+                }
+              }}
+              onLoad={() => {
+                // Hide fallback when image loads successfully
+                const fallback = document.getElementById(`fallback-${item._id}`);
+                if (fallback) {
+                  fallback.style.display = "none";
+                }
+              }}
+            />
+            {/* Conditional fallback - hidden by default */}
+            <div 
+              id={`fallback-${item._id}`}
+              className="absolute inset-0 bg-gray-200 flex items-center justify-center hidden"
+              style={{ display: 'none' }}
+            >
+              <span className="text-gray-500">Image failed to load</span>
+            </div>
+          </div>
+        ) : (
+          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+            <span className="text-gray-500">No Image</span>
+          </div>
+        )}
+      </div>
+
+      <h4 className="text-lg font-semibold text-gray-800">
+        {item.name}
+      </h4>
+      <p className="text-sm text-gray-600 mt-1 capitalize">
+        {item.category}
+      </p>
+      <p className="text-sm text-[#EF5350] font-semibold">₨ {item.price.toFixed(2)}</p>
+      <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
+      <p
+        className={`text-sm mt-1 ${
+          item.is_available ? "text-green-600" : "text-red-600"
+        }`}
+      >
+        {item.is_available ? "Available" : "Not Available"}
+      </p>
+    </motion.div>
+  )}
+  emptyMessage="No menu items found."
+  gridClassName="grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+/>
 
         <PaginationControls
           currentPage={currentPage}

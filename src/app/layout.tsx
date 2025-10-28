@@ -66,6 +66,7 @@ import "./globals.css";
 import { CartProvider } from "../context/CartContext";
 import { AuthProvider } from "../context/AuthContext";
 import { LanguageProvider } from "../context/LanguageContext";
+import { StripeProvider } from '../context/stripeContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -95,7 +96,9 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <AuthProvider>
+            <StripeProvider>
             <CartProvider>{children}</CartProvider>
+            </StripeProvider>
           </AuthProvider>
         </LanguageProvider>
       </body>
