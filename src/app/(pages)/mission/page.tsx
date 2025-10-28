@@ -48,7 +48,7 @@
 // // // //   return (
 // // // //     <>
 // // // //       <Navbar />
-      
+
 // // // //       <main className="min-h-screen bg-white">
 // // // //         {/* Hero Section */}
 // // // //         <section className="relative bg-gradient-to-br from-gray-900 to-black py-20">
@@ -100,15 +100,15 @@
 // // // //                           </span>
 // // // //                           <span>{formatDate(blog.postedAt)}</span>
 // // // //                         </div>
-                        
+
 // // // //                         <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
 // // // //                           {blog.title}
 // // // //                         </h2>
-                        
+
 // // // //                         <p className="text-lg text-gray-600 leading-relaxed">
 // // // //                           {blog.description}
 // // // //                         </p>
-                        
+
 // // // //                         <button className="inline-flex items-center gap-2 bg-red-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-600 transition-all duration-300 transform hover:scale-105">
 // // // //                           Read More
 // // // //                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,7 +185,7 @@
 // // // //                     Submit your application and come join our kitchen.🍙
 // // // //                   </p>
 // // // //                 </div>
-                
+
 // // // //                 <button className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-all duration-300 transform hover:scale-105">
 // // // //                   Join Our Team
 // // // //                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,7 +267,7 @@
 // // //   return (
 // // //     <>
 // // //       <Navbar />
-      
+
 // // //       <main className="min-h-screen bg-white">
 // // //         {/* Hero Section */}
 // // //         <section className="relative bg-gradient-to-br from-gray-900 to-black py-20">
@@ -319,15 +319,15 @@
 // // //                           </span>
 // // //                           <span>{formatDate(blog.postedAt)}</span>
 // // //                         </div>
-                        
+
 // // //                         <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
 // // //                           {blog.title}
 // // //                         </h2>
-                        
+
 // // //                         <p className="text-lg text-gray-600 leading-relaxed">
 // // //                           {blog.description}
 // // //                         </p>
-                        
+
 // // //                         <button className="inline-flex items-center gap-2 bg-red-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-600 transition-all duration-300 transform hover:scale-105">
 // // //                           Read More
 // // //                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -360,11 +360,11 @@
 // // //                     Careers
 // // //                   </span>
 // // //                 </div>
-                
+
 // // //                 <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
 // // //                   Let's get to work... Or rather, to sushi🍣
 // // //                 </h2>
-                
+
 // // //                 <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
 // // //                   <p>
 // // //                     We're looking for talented people who are passionate about sushi and eager to grow within a relaxed team focused on the art of Japanese cuisine. Here, you'll hone your skills, explore new flavors, and work in a fast-paced, yet always positive environment!
@@ -376,7 +376,7 @@
 // // //                     Submit your application and come join our kitchen.🍙
 // // //                   </p>
 // // //                 </div>
-                
+
 // // //                 <button className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-all duration-300 transform hover:scale-105">
 // // //                   Join Our Team
 // // //                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -860,6 +860,7 @@ import Link from "next/link";
 import Navbar from "../../../components/organisms/Navbar/page";
 import Footer from "../../../components/organisms/Footer/page";
 import { useLanguage } from "../../../context/LanguageContext";
+import Image from "next/image";
 
 interface Blog {
   _id: string;
@@ -921,7 +922,7 @@ export default function BlogPage() {
               Sushi<span className="text-red-500">Blog</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              {t('Stories, Insights, and News from SushiMaster')}
+              {t("Stories, Insights, and News from SushiMaster")}
             </p>
           </div>
         </section>
@@ -967,7 +968,7 @@ export default function BlogPage() {
                       <div className="space-y-6">
                         <div className="flex items-center gap-4 text-sm text-gray-500">
                           <span className="bg-red-100 text-red-600 px-3 py-1 rounded-full font-semibold">
-                            {t('Latest')}
+                            {t("Latest")}
                           </span>
                           <span>{formatDate(blog.postedAt)}</span>
                         </div>
@@ -981,7 +982,7 @@ export default function BlogPage() {
                         </p>
 
                         <button className="inline-flex items-center gap-2 bg-red-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-600 transition-all duration-300 transform hover:scale-105">
-                          {t('Read More')}
+                          {t("Read More")}
                           <svg
                             className="w-4 h-4"
                             fill="none"
@@ -1007,9 +1008,16 @@ export default function BlogPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-20">
               {/* Image */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="/api/placeholder/600/600"
+                {/* <img
+                  src=" "
                   alt={t('Join Our Team')}
+                  className="w-full h-96 lg:h-[500px] object-cover transform hover:scale-105 transition-transform duration-700"
+                /> */}
+                <Image
+                  src="/join.jpg" // Path to the image in your 'public' folder
+                  alt="Join Our Team"
+                  // width={1200}  // Specify the width of the image
+                  // height={500}  // Specify the height of the image
                   className="w-full h-96 lg:h-[500px] object-cover transform hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -1019,7 +1027,7 @@ export default function BlogPage() {
               <div className="space-y-6">
                 <div className="flex items-center gap-4 text-sm text-gray-500">
                   <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full font-semibold">
-                    {t('Careers')}
+                    {t("Careers")}
                   </span>
                 </div>
 
@@ -1029,13 +1037,17 @@ export default function BlogPage() {
 
                 <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
                   <p>
-                    {t("We're looking for talented people who are passionate about sushi and eager to grow within a relaxed team focused on the art of Japanese cuisine. Here, you'll hone your skills, explore new flavors, and work in a fast-paced, yet always positive environment!")}
+                    {t(
+                      "We're looking for talented people who are passionate about sushi and eager to grow within a relaxed team focused on the art of Japanese cuisine. Here, you'll hone your skills, explore new flavors, and work in a fast-paced, yet always positive environment!"
+                    )}
                   </p>
                   <p>
-                    {t("If you have knife skills, attention to detail, and a desire to learn (or perfect) the art of sushi, we want to hear from you!")}
+                    {t(
+                      "If you have knife skills, attention to detail, and a desire to learn (or perfect) the art of sushi, we want to hear from you!"
+                    )}
                   </p>
                   <p className="font-semibold text-gray-900">
-                    {t('Submit your application and come join our kitchen.🍙')}
+                    {t("Submit your application and come join our kitchen.🍙")}
                   </p>
                 </div>
 
@@ -1044,7 +1056,7 @@ export default function BlogPage() {
                   href="/join-our-team"
                   className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
                 >
-                  {t('Join Our Team')}
+                  {t("Join Our Team")}
                   <svg
                     className="w-4 h-4"
                     fill="none"
